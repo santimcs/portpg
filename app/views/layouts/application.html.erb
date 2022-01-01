@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><% if content_for?(:title) %><%= yield :title %><% else %>PortPg<% end %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand" href="#">PortPg</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item">
+            <%= link_to 'Tickers', tickers_path, class: "nav-link" %>
+          </li>        
+          <!-- START OF CUT & PASTE -->
+          <!-- start of set50 dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="set50Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              SET50
+            </a>
+            <div class="dropdown-menu" aria-labelledby="set50Dropdown">
+              <%= link_to('ADVANC', 'tickers/8',  class: "dropdown-item", target: "_blank") %>      
+              <%= link_to('AOT',    'tickers/28',  class: "dropdown-item", target: "_blank") %>      
+              <%= link_to('BBL',    'tickers/54',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BGRIM',  'tickers/63',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BJC',    'tickers/68',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BTS',    'tickers/86',  class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('CBG',    'tickers/90',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('COM7',   'tickers/118', class: "dropdown-item", target: "_blank") %> 
+              <%= link_to('CPALL',  'tickers/120', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('CPF',    'tickers/121', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('CPN',    'tickers/125', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('DELTA',  'tickers/144', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('DTAC',   'tickers/150', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('EA',     'tickers/153', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('EGCO',   'tickers/161', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('GLOBAL', 'tickers/198', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('GPSC',   'tickers/202', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('GULF',   'tickers/207', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('HMPRO',  'tickers/214', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('INTUCH', 'tickers/231', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('IVL',    'tickers/238', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('KBANK',  'tickers/253', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('KTC',    'tickers/266', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('LH',     'tickers/275', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('MINT',   'tickers/309', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('MTC',    'tickers/323', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('PTT',    'tickers/389', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('PTTEP',  'tickers/390', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('PTTGC',  'tickers/391', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('RATCH',  'tickers/399', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SAWAD',  'tickers/429', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SCB',    'tickers/432', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SCC',    'tickers/433', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('STA',    'tickers/489', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('TISCO',  'tickers/539', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TTB',    'tickers/549', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TU',     'tickers/591', class: "dropdown-item", target: "_blank") %>
+            </div>            
+          </li>          
+          <!-- end of set100 dropdown -->            
+          <!-- start of set100 dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="set100Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              SET100
+            </a>
+            <div class="dropdown-menu" aria-labelledby="set100Dropdown">
+              <%= link_to('AEONTS', 'tickers/9',   class: "dropdown-item", target: "_blank") %>
+              <%= link_to('AMATA',  'tickers/24',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('AP',     'tickers/29',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BCH',    'tickers/55',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BCPG',   'tickers/57',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('CHG',    'tickers/101', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('CKP',    'tickers/110', class: "dropdown-item", target: "_blank") %>        
+              <%= link_to('DOHOME', 'tickers/670', class: "dropdown-item", target: "_blank") %>        
+              <%= link_to('GUNKUL', 'tickers/208', class: "dropdown-item", target: "_blank") %>        
+              <%= link_to('JAS',    'tickers/240', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('JMART',  'tickers/244', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('JMT',    'tickers/245', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('KKP',    'tickers/262', class: "dropdown-item", target: "_blank") %> 
+              <%= link_to('MEGA',   'tickers/303', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('ORI',    'tickers/347', class: "dropdown-item", target: "_blank") %> 
+              <%= link_to('PLANB',  'tickers/366', class: "dropdown-item", target: "_blank") %>         
+              <%= link_to('PRM',    'tickers/382', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('PTG',    'tickers/387', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('RS',     'tickers/413', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SINGER',   'tickers/452', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('SPALI',  'tickers/470', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SUPER',  'tickers/496', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SYNEX',    'tickers/504', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('TASCO',  'tickers/511', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TCAP',   'tickers/512', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('THANI',  'tickers/528', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TQM',    'tickers/657', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TVO',    'tickers/594', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('WHA',    'tickers/628', class: "dropdown-item", target: "_blank") %>
+            </div>
+          </li>          
+          <!-- end of set100 dropdown -->          
+          <!-- start of set dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="setDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              SET
+            </a>
+            <div class="dropdown-menu" aria-labelledby="setDropdown">
+              <%= link_to('AIMIRT',   'tickers/13', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('AMANAH',   'tickers/22', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('ASIAN',    'tickers/40', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('ASK',      'tickers/42', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('BAY',      'tickers/53',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BFIT',     'tickers/62',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BGC',      'tickers/646', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BKI',      'tickers/71',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BJCHI',    'tickers/69',  class: "dropdown-item", target: "_blank") %>
+              <%= link_to('BLAND',    'tickers/74',  class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('BOFFICE',  'tickers/76',  class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('CPNCG',    'tickers/126', class: "dropdown-item", target: "_blank") %>       
+              <%= link_to('CPNREIT',  'tickers/127', class: "dropdown-item", target: "_blank") %>       
+              <%= link_to('DCC',      'tickers/140', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('DIF',      'tickers/146', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('DRT',      'tickers/149', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('EASTW',    'tickers/155', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('EGATIF',   'tickers/160', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('EPG',    'tickers/166', class: "dropdown-item", target: "_blank") %> 
+
+              <%= link_to('GC',       'tickers/188', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('GFPT',   'tickers/192', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('GLAND',    'tickers/197', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('GVREIT',   'tickers/209', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('HREIT',    'tickers/217', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('HTC',      'tickers/218', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('ILM',      'tickers/702', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('JASIF',    'tickers/241', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('JMT',      'tickers/245', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('LALIN',    'tickers/271', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('LHSC',     'tickers/280', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('LSt',      'tickers/286', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('MAKRO',    'tickers/291', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('MC',       'tickers/299', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('MCS',      'tickers/301', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('NER',      'tickers/649', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('NOBLE',    'tickers/336', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('NTV',      'tickers/340', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('POPF',     'tickers/371', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('PTL',      'tickers/388', class: "dropdown-item", target: "_blank") %>       
+              <%= link_to('RCL',      'tickers/401', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('ROJNA',    'tickers/409', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SAT',      'tickers/427', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SAUCE',    'tickers/428', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SC',       'tickers/431', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SCCC',     'tickers/434', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SENA ',    'tickers/443', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('SF',       'tickers/444', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SGP',      'tickers/447', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SIRI',     'tickers/453', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SIS',      'tickers/455', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SMPC',     'tickers/463', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SMT',      'tickers/464', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SNC',      'tickers/465', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SPCG',     'tickers/472', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SPI',      'tickers/475', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SSP',      'tickers/486', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('STARK',    'tickers/712', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('SUC',      'tickers/494', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SUPEREIF', 'tickers/675', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('SVH',      'tickers/499', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('TFG',      'tickers/521', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TIP',      'tickers/537', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TLGF',     'tickers/545', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TMT',      'tickers/553', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TOA',      'tickers/562', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TPIPP',    'tickers/569', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TPIPL',    'tickers/568', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TSTH',     'tickers/587', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TTW',      'tickers/590', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('UTP',      'tickers/613', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('UV',       'tickers/614', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('VGI',      'tickers/618', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('VIBHA',    'tickers/619', class: "dropdown-item", target: "_blank") %>
+
+              <%= link_to('VNT',      'tickers/622', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('WHART',    'tickers/630', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('WHAUP',    'tickers/631', class: "dropdown-item", target: "_blank") %>              
+            </div>
+          </li>   
+          <!-- end of set dropdown -->
+          <!-- start of mai dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="maiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              mai
+            </a>
+            <div class="dropdown-menu" aria-labelledby="maiDropdown">
+              <%= link_to('MBAX', 'tickers/695', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('PDG',  'tickers/354', class: "dropdown-item", target: "_blank") %>
+              <%= link_to('TACC', 'tickers/507', class: "dropdown-item", target: "_blank") %>
+
+            </div>
+          </li>   
+          <!-- end of mai dropdown -->
+          <!-- END OF CUT & PASTE -->             
+          <li class="nav-item">
+            <%= link_to 'Profits-Q1', "/list_profits_q1", class: "nav-link" %>
+          </li>  
+          <li class="nav-item">
+            <%= link_to 'Profits-Q2', "/list_profits_q2", class: "nav-link" %>
+          </li>    
+          <li class="nav-item">
+            <%= link_to 'Profits-Q3', "/list_profits_q3", class: "nav-link" %>
+          </li>   
+          <li class="nav-item">
+            <%= link_to 'Profits-Q4', "/list_profits_q4", class: "nav-link" %>
+          </li>                        
+          <li class="nav-item">
+            <%= link_to 'Charts', charts_path, class: "nav-link" %>
+          </li>
+
+        </ul>
+      </div>
+    </nav>    
+
+    <div class="container">
+      <%= yield %>
+    </div> <!-- end of container div from application -->
+
+  </body>
+</html>

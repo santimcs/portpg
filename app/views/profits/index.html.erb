@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Profits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+      <th>Quarter</th>
+      <th>Kind</th>
+      <th>Latest amt y</th>
+      <th>Previous amt y</th>
+      <th>Inc amt y</th>
+      <th>Inc pct y</th>
+      <th>Latest amt q</th>
+      <th>Previous amt q</th>
+      <th>Inc amt q</th>
+      <th>Inc pct q</th>
+      <th>Q amt c</th>
+      <th>Y amt</th>
+      <th>Inc amt py</th>
+      <th>Inc pct py</th>
+      <th>Q amt p</th>
+      <th>Inc amt pq</th>
+      <th>Inc pct pq</th>
+      <th>Mean pct</th>
+      <th>Std pct</th>
+      <th>Publish date</th>
+      <th>Ticker</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @profits.each do |profit| %>
+      <tr>
+        <td><%= profit.name %></td>
+        <td><%= profit.year %></td>
+        <td><%= profit.quarter %></td>
+        <td><%= profit.kind %></td>
+        <td><%= profit.latest_amt_y %></td>
+        <td><%= profit.previous_amt_y %></td>
+        <td><%= profit.inc_amt_y %></td>
+        <td><%= profit.inc_pct_y %></td>
+        <td><%= profit.latest_amt_q %></td>
+        <td><%= profit.previous_amt_q %></td>
+        <td><%= profit.inc_amt_q %></td>
+        <td><%= profit.inc_pct_q %></td>
+        <td><%= profit.q_amt_c %></td>
+        <td><%= profit.y_amt %></td>
+        <td><%= profit.inc_amt_py %></td>
+        <td><%= profit.inc_pct_py %></td>
+        <td><%= profit.q_amt_p %></td>
+        <td><%= profit.inc_amt_pq %></td>
+        <td><%= profit.inc_pct_pq %></td>
+        <td><%= profit.mean_pct %></td>
+        <td><%= profit.std_pct %></td>
+        <td><%= profit.publish_date %></td>
+        <td><%= profit.ticker %></td>
+        <td><%= link_to 'Show', profit %></td>
+        <td><%= link_to 'Edit', edit_profit_path(profit) %></td>
+        <td><%= link_to 'Destroy', profit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Profit', new_profit_path %>

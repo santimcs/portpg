@@ -1,0 +1,258 @@
+<% content_for :title, @ticker.name %>
+<% i = 0 %>
+<% latest_year = 0 %>  
+<% latest_quarter = 0 %>  
+<% session_quarter = '' %>  
+<% publish_date = Date.today %>  
+
+<% @epss.each do |eps| %>
+  <% i += 1 %>
+  <% if i == 1 %>
+      <% latest_year = eps.year %>
+      <% latest_quarter = eps.quarter %>  
+      <% publish_date = eps.publish_date %>         
+  <% end %> 
+<% end %> 
+<% yesterday = @stock.updated_at.prev_day %>
+<h3 align="center">Data as end of <span id="date"><%= yesterday.strftime('%B-%d, %Y') %></span></h3>
+<!-- Start of max, target, price section -->
+<section id="first-sect">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-body">      
+          <table class="table table-striped table-hover">
+            <tbody>
+              <tr>
+                <!-- Stock -->                  
+                <td><%= 'Max' %></td>
+                <td id="max-price"><%= number_with_precision(@stock.max_price, precision: 2) %></td>
+                <td><%= 'Min' %></td>
+                <td id="min-price"><%= number_with_precision(@stock.min_price, precision: 2) %></td>
+                <td><%= 'P/E' %></td>
+                <td id="stk-pe"><%= @stock.pe %></td>
+                <td><%= 'P/BV' %></td>
+                <td id="stk-pbv"><%= @stock.pbv %></td>  
+                <td><%= 'Volume' %></td>
+                <td id="daily-volume"><%= number_with_precision(@stock.daily_volume, precision: 3) %></td>
+                <td><%= 'Beta' %></td>
+                <td id="beta"><%= @stock.beta %></td>    
+              </tr>
+              <!-- Consensus -->
+              <% if !@consensu.nil? %> 
+                <% ext_lnk1 = 'https://www.panphol.com/aio/'+@ticker.name+'/dividend' %>
+                <% ext_lnk2 = 'https://www.santiwebsite.com/prices/'+@ticker.name+'.html' %>
+                <tr>
+                  <td><%= 'Target' %></td>
+                  <td id="target-price"><%= number_with_precision(@consensu.target_price, precision: 2) %></td>
+                  <td colspan="2"></td>
+                  <td><%= 'P/E' %></td>
+                  <td id="css-pe"><%= @consensu.pe %></td>
+                  <td><%= 'P/BV' %></td>
+                  <td id="css-pbv"><%= @consensu.pbv %></td>  
+                  <td><%= 'B-H-S' %></td>
+                  <td id="b-h-s"><%= @consensu.bhs %></td>
+                  <td class='yield'><%= link_to('Yield', ext_lnk1, target: "_blank") %></td>
+                  <td id="yld"><%= @consensu.yield %></td>
+              </tr>
+              <% end %>
+              <% if @consensu.nil? %>    
+                <% ext_lnk2 = 'https://www.santiwebsite.com/prices/'+@ticker.name+'.html' %>
+                <tr>
+                  <td colspan="12"><%= 'No consensus' %></td>
+                </tr>
+              <% end %>
+              <!-- Calculated Percent -->
+              <tr>
+                <td class='price'><%= link_to('Price', ext_lnk2, target: "_blank") %></td>
+                <td id="price"><%= number_with_precision(@stock.price, precision: 2) %></td>
+                <td colspan="3"><%= 'Up to Max Percent' %></td>
+                <% dif1 = @stock.max_price - @stock.price %>
+                <td id="up-to-max"><%= number_with_precision(dif1/@stock.price*100, precision: 2) %></td>
+                <% if !@consensu.nil? %> 
+                  <td colspan="3"><%= 'Up to Target Percent' %></td>
+                  <% dif2 = @consensu.target_price - @stock.price %>                  
+                  <td id="up-to-target"><%= number_with_precision(dif2/@stock.price*100, precision: 2) %></td>
+                <% else %>
+                  <td colspan="4"><%= 'No consensus' %></td>
+                <% end %>
+                <td colspan="2"><%= @stock.market %></td>
+              </tr>    
+              <!-- Portfolio -->
+              <% if !@portfolio.nil? %> 
+                <% if @portfolio.comp_qty > 0 %>
+                  <% unit_cost = @portfolio.comp_unit_cost %>
+                <% else %>
+                  <% unit_cost = @portfolio.buy_unit_cost %>
+                <% end %>
+                <tr>
+                  <td><%= 'Cost' %></td>
+                  <td><%= number_with_precision(unit_cost, precision: 2) %></td>
+                  <td colspan="3"><%= 'Up to Max Percent' %></td>
+                  <% dif3 = @stock.max_price-unit_cost %>
+                  <td><%= number_with_precision(dif3/@stock.price*100, precision: 2) %></td>
+                  <% if !@consensu.nil? %> 
+                  <td colspan="3"><%= 'Up to Target Percent' %></td>
+                  <% dif4 = @consensu.target_price-unit_cost %>
+                  <td><%= number_with_precision(dif4/@stock.price*100, precision: 2) %></td>
+                  <% else %>
+                  <td colspan="4"><%= 'No consensus' %></td>
+                  <% end %>
+                  <td><%= 'Price%' %></td>
+                  <% dif5 = @stock.price-unit_cost %>
+                  <td><%= number_with_precision(dif5/@stock.price*100, precision: 2) %></td>
+                </tr>
+              <% end %> <!-- end of portfolio not nil -->                            
+            </tbody>
+          </table>
+        </div> <!-- enf of card-body -->
+      </div> <!-- enf of card -->
+    </div> <!-- end of col -->
+  </div> 
+</section>
+<br/>  
+<!-- Start of image quarterly section -->
+<section id="second-sect">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card text-center text-white bg-dark">
+        <div class="card-body">
+          <% i = 0 %>
+          <% @charts.each do |chart| %>
+            <% i += 1 %>
+            <% if chart.year == latest_year && chart.quarter == latest_quarter %>
+              <%= image_tag chart.image_q, class: "card-img-top img-fluid" %>
+            <% end %>
+          <% end %>         
+        </div>
+        <div class="card-footer">
+          <%= 'Publish date: ' + publish_date.strftime('%B-%d, %Y') %>
+        </div> 
+      </div> <!-- enf of card -->
+    </div> <!-- end of col -->
+  </div> <!-- end of row -->
+</section>
+<br/>
+<!-- Start of quarterly profits section -->
+<section id="third-sect">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-header text-center">
+          <%= @ticker.name + ' Quarterly Profit' %>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Qtr</th>
+                <th>Qtr Amt</th>
+                <th>YoY Amt</th>
+                <th>Qtr%</th>
+                <th>Acc Qtr</th>
+                <th>Acc YoY</th>
+                <th>Acc%</th>    
+              </tr>
+            </thead>          
+            <tbody>
+              <% i = 0 %>
+              <% session_quarter = '' %>             
+              <% @epss.each do |eps| %>
+                <% i += 1 %>
+                <% if i <= 8 %>
+                  <% if i == 1 %>
+                    <% session_quarter = 'Q' + eps.quarter.to_s %>
+                  <% end %>            
+                  <tr>
+                    <td><%= eps.year %></td>
+                    <td><%= 'Q' + eps.quarter.to_s %></td>
+                    <td><%= number_with_precision(eps.q_amt, precision: 0, delimiter: ',') %></td>
+                    <td><%= number_with_precision(eps.y_amt, precision: 0, delimiter: ',') %></td>
+                    <% if (eps.y_amt != 0) %>
+                      <% amt1 = eps.q_amt-eps.y_amt %>
+                      <td><%= number_with_precision(amt1/eps.y_amt.abs.to_f*100, precision: 1, delimiter: ',') %></td>
+                    <% else %>
+                      <td><%= 0.0 %></td>
+                    <% end %> 
+                    <td><%= number_with_precision(eps.aq_amt, precision: 0, delimiter: ',') %></td>
+                    <td><%= number_with_precision(eps.ay_amt, precision: 0, delimiter: ',') %></td>
+                    <% if (eps.ay_amt != 0) %>
+                      <% amt2 = eps.aq_amt-eps.ay_amt %>
+                      <td><%= number_with_precision(amt2/eps.ay_amt.abs.to_f*100, precision: 1, delimiter: ',') %></td>
+                    <% else %>
+                      <td><%= 0.0 %></td>
+                    <% end %>
+                  </tr>
+                <% end %> 
+              <% end %> <!-- end of eps loop -->
+            </tbody>
+          </table>
+        </div> <!-- end of card-body --> 
+      </div> <!-- end of card -->
+    </div> <!-- end of col -->
+  </div> 
+</section>
+<br/>
+<!-- Start of image yearly section -->
+<section id="fourth-sect">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card text-center text-white bg-dark">
+        <div class="card-body">
+          <% i = 0 %>
+          <% @charts.each do |chart| %>
+            <% i += 1 %>
+            <% if chart.year == latest_year && chart.quarter == latest_quarter %>
+              <%= image_tag chart.image_y, class: "card-img-top img-fluid" %>
+            <% end %>
+          <% end %>         
+        </div> <!-- enf of card-body -->
+      </div> <!-- enf of card -->
+    </div> <!-- end of col -->
+  </div> 
+</section>
+<br/>
+<!-- Start of Yearly profits -->
+<section id="fifth-sect">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-header text-center">
+          <%= @ticker.name + ' Yearly Profit' %>
+        </div>
+        <div class="card-body">      
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Year</th>      
+                <th>Qtr</th>
+                <th>Last Year Amt</th>              
+                <th>This Year Amt</th> 
+                <th>Profit</th>
+                <th>Pct</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @yr_profits.each do |yr_profit| %>
+                <% if yr_profit.quarter == latest_quarter %>
+                  <tr>
+                    <td><%= yr_profit.year %></td>
+                    <td><%= 'Q' + yr_profit.quarter.to_s %></td>
+                    <td><%= number_to_human(yr_profit.previous_amt*1000) %></td>
+                    <td><%= number_to_human(yr_profit.latest_amt*1000) %></td>          
+                    <td><%= number_to_human(yr_profit.inc_amt*1000) %></td>
+                    <td><%= number_with_precision(yr_profit.inc_pct, precision: 1, delimiter: ',') %></td>
+                  </tr>
+                <% end %>
+              <% end %> 
+            </tbody>
+          </table>
+        </div> <!-- enf of card-body -->
+      </div> <!-- enf of card -->
+    </div> <!-- end of col -->
+  </div> 
+</section>
+<br/>
+
+<%# <%= link_to 'Back', tickers_path  %>

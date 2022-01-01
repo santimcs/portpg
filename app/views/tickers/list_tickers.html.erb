@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+<% content_for :title, 'Tickers' %>
+<h3>Tickers</h3>
+<section class="search-form">
+  <%= form_for :tickers, method: :get do |f| %>
+    <div class="input-group input-group-md">
+      <%= label_tag :keywords, nil, class: "sr-only" %>
+      <%= text_field_tag :keywords, nil,
+            placeholder: "Ticker Name",
+                  class: "form-control input-md" %>
+      <span class="input-group-btn">
+        <%= submit_tag "Find Tickers",
+              class: "btn btn-primary btn-md" %>
+      </span>
+    </div>
+  <% end %>
+</section>
+<table id="tickers" class="display table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Full name</th>
+      <th>Sector</th>
+      <th>Subsector</th>
+      <th>Market</th>
+      <th>Website</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickers.each do |ticker| %>
+      <tr>
+        <td><%= ticker.name %></td>
+        <td><%= ticker.full_name %></td>
+        <td><%= ticker.sector %></td>
+        <td><%= ticker.subsector %></td>
+        <td><%= ticker.market %></td>
+        <% if !ticker.website.nil? %>
+        <td><%= link_to(ticker.website, "https://"+ticker.website, :target => "_new") %></td>
+        <% else %>
+          <td>Dummy</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ticker', new_ticker_path %>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+<% content_for :title, @chart.ticker.name + ' Chart' %>
+
+<p>
+  <strong>Ticker:</strong>
+  <%= @chart.ticker.name %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @chart.year %>
+</p>
+
+<p>
+  <strong>Quarter:</strong>
+  <%= @chart.quarter %>
+</p>
+
+<!-- start of image quarter section -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card text-center text-white bg-dark">
+      <div class="card-body"> 
+            <%=  image_tag @chart.image_q, class: "card-img-top img-fluid"  %>
+      </div> 
+    </div> <!-- enf of card -->
+  </div> <!-- end of col -->
+</div> <!-- end of row -->
+<!-- end of image quarter section -->
+<br/>
+<!-- start of image year section -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card text-center text-white bg-dark">
+      <div class="card-body"> 
+            <%=  image_tag @chart.image_y, class: "card-img-top img-fluid"  %>
+      </div> 
+    </div> <!-- enf of card -->
+  </div> <!-- end of col -->
+</div> <!-- end of row -->
+<!-- end of image year section -->
+<br/>
+<%= link_to 'Edit', edit_chart_path(@chart) %> |
+<%= link_to 'Back', charts_path %>
