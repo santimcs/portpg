@@ -17,10 +17,10 @@ class Chart < ApplicationRecord
         	]
 
   	QUARTER = [	  
+			"4",
 			"3",
 			"2",		    		
-			"1",      
-			"4",
+			"1"      
         	]
 
 private
