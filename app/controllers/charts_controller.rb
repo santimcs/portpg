@@ -4,7 +4,7 @@ class ChartsController < ApplicationController
   # GET /charts
   # GET /charts.json
   def index
-    @charts = Chart.order('year desc, quarter desc, name asc')
+    @charts = Chart.order('name asc, year desc, quarter desc')
   end
 
   # GET /charts/1

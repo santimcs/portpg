@@ -16,7 +16,7 @@ class ProfitsController < ApplicationController
   end
 
   def list_profits_q3
-      @profits = Profit.where("publish_date >= '2019-10-01'").order(name: :asc, quarter: :desc)
+      @profits = Profit.where("publish_date >= '2022-10-01'").order(name: :asc, quarter: :desc)
   end
   def list_profits_q4
       @profits = Profit.where("publish_date >= '2019-01-01'").order(name: :asc, quarter: :desc)

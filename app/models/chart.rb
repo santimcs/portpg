@@ -4,6 +4,7 @@ class Chart < ApplicationRecord
 	before_save :assign_names
 
   	YEAR = [
+			"2022",
 			"2021",
 			"2020",
 			"2019",
@@ -12,15 +13,14 @@ class Chart < ApplicationRecord
 			"2016",
 			"2015",
 			"2014",
-			"2013",
-			"2012"
+			"2013"
         	]
 
   	QUARTER = [	  
-			"4",
-			"3",
-			"2",		    		
-			"1"      
+			"3",  		
+			"2",	    		
+			"1",     
+			"4"
         	]
 
 private
