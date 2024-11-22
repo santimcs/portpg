@@ -13,7 +13,8 @@
       <% publish_date = eps.publish_date %>         
   <% end %> 
 <% end %> 
-<% yesterday = @stock.updated_at.prev_day %>
+<!-- yesterday = @stock.updated_at.prev_day --> 
+<% yesterday = @stock.updated_at %>
 <h3 align="center">Data as end of <span id="date"><%= yesterday.strftime('%B-%d, %Y') %></span></h3>
 <!-- Start of max, target, price section -->
 <section id="first-sect">
