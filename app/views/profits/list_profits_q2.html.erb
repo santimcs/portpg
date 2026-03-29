@@ -3,16 +3,16 @@
     <div class="col-xs-3 col-sm-1 alignC">
     </div> <!-- end of col1 -->
     <div class="col-xs-3 col-sm-2 alignR">
-        <%= '18Q2-17Q3' %><br/>
+        <%= '25Q2-24Q3' %><br/>
         <%= '--ditto--' %><br/>
-        <%= ' 2018 Q2 ' %><br/>
+        <%= ' 2025 Q2 ' %><br/>
         <%= '--ditto--' %>
     </div> <!-- end of col2 -->
     <div class="col-xs-3 col-sm-2 alignR">
-        <%= '17Q2-16Q3' %><br/>
-        <%= '18Q1-17Q2' %><br/>
-        <%= ' 2017 Q2 ' %><br/>
-        <%= ' 2018 Q1 ' %>        
+        <%= '24Q2-23Q3' %><br/>
+        <%= '25Q1-24Q2' %><br/>
+        <%= ' 2024 Q2 ' %><br/>
+        <%= ' 2025 Q1' %>        
     </div> <!-- end of col3 -->
     <div class="col-xs-3 col-sm-1 alignR">
         <%= 'Inc./' %><br/>
@@ -99,7 +99,7 @@
         <div class="col-xs-2 col-sm-2 alignR">
             <%= 'Target' %><br/>
             <% if profit.ticker.consensu %>
-                <%= number_with_precision(profit.ticker.consensu.target_price, precision: 2, delimiter: ",") %><br/>
+                <%= number_with_precision(profit.ticker.consensu.target, precision: 2, delimiter: ",") %><br/>
                 <%= 'B-H-S' %><br/>
                 <%= profit.ticker.consensu.bhs %>
             <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180505095413) do
+ActiveRecord::Schema.define(version: 20250608080557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,22 +30,22 @@ ActiveRecord::Schema.define(version: 20180505095413) do
 
   create_table "consensus", force: :cascade do |t|
     t.string "name"
-    t.decimal "price", precision: 6, scale: 2
+    t.decimal "target", precision: 6, scale: 2
+    t.decimal "max", precision: 6, scale: 2
+    t.decimal "min", precision: 6, scale: 2
     t.integer "buy"
     t.integer "hold"
     t.integer "sell"
-    t.decimal "eps_a"
-    t.decimal "eps_b"
-    t.decimal "pe"
-    t.decimal "pbv"
-    t.decimal "yield"
-    t.decimal "target_price", precision: 6, scale: 2
-    t.string "status"
     t.bigint "ticker_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_consensus_on_name", unique: true
     t.index ["ticker_id"], name: "index_consensus_on_ticker_id"
+  end
+
+  create_table "consensus_new", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 10
+    t.decimal "target_price", precision: 6, scale: 2
   end
 
   create_table "epss", force: :cascade do |t|

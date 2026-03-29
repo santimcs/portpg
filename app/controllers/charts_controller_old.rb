@@ -68,10 +68,12 @@ class ChartsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    # def chart_params
+    #   params.require(:chart).permit(:ticker_id, :year, :quarter, :image_q, :image_y)
+    # end
     def chart_params
       params.require(:chart).permit(:ticker_id, :year, :quarter, :image_q, :image_y).tap do |whitelisted|
         whitelisted[:image_q] = whitelisted[:image_q]&.strip
         whitelisted[:image_y] = whitelisted[:image_y]&.strip
       end
     end
-end

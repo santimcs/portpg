@@ -14,8 +14,8 @@
   <% end %> 
 <% end %> 
 <!-- yesterday = @stock.updated_at.prev_day --> 
-<% yesterday = @stock.updated_at %>
-<h3 align="center">Data as end of <span id="date"><%= yesterday.strftime('%B-%d, %Y') %></span></h3>
+<%# <% yesterday = @stock.updated_at  %>
+<%# <h3 align="center">Data as end of <span id="date"><%= yesterday.strftime('%B-%d, %Y') </span></h3> %>
 <!-- Start of max, target, price section -->
 <section id="first-sect">
   <div class="row">
@@ -27,17 +27,17 @@
               <tr>
                 <!-- Stock -->                  
                 <td><%= 'Max' %></td>
-                <td id="max-price"><%= number_with_precision(@stock.max_price, precision: 2) %></td>
+                <%# <td id="max-price"><%= number_with_precision(@stock.max_price, precision: 2) </td> %>
                 <td><%= 'Min' %></td>
-                <td id="min-price"><%= number_with_precision(@stock.min_price, precision: 2) %></td>
+                <%# <td id="min-price"><%= number_with_precision(@stock.min_price, precision: 2) </td> %>
                 <td><%= 'P/E' %></td>
-                <td id="stk-pe"><%= @stock.pe %></td>
+                <%# <td id="stk-pe"><%= @stock.pe </td> %>
                 <td><%= 'P/BV' %></td>
-                <td id="stk-pbv"><%= @stock.pbv %></td>  
+                <%# <td id="stk-pbv"><%= @stock.pbv </td>   %>
                 <td><%= 'Volume' %></td>
-                <td id="daily-volume"><%= number_with_precision(@stock.daily_volume, precision: 3) %></td>
+                <%# <td id="daily-volume"><%= number_with_precision(@stock.daily_volume, precision: 3) </td> %>
                 <td><%= 'Beta' %></td>
-                <td id="beta"><%= @stock.beta %></td>    
+                <%# <td id="beta"><%= @stock.beta </td>     %>
               </tr>
               <!-- Consensus -->
               <% if !@consensu.nil? %> 
@@ -45,16 +45,16 @@
                 <% ext_lnk2 = 'https://www.santiwebsite.com/prices/'+@ticker.name+'.html' %>
                 <tr>
                   <td><%= 'Target' %></td>
-                  <td id="target-price"><%= number_with_precision(@consensu.target_price, precision: 2) %></td>
+                  <td id="target-price"><%= number_with_precision(@consensu.target, precision: 2) %></td>
                   <td colspan="2"></td>
-                  <td><%= 'P/E' %></td>
-                  <td id="css-pe"><%= @consensu.pe %></td>
-                  <td><%= 'P/BV' %></td>
-                  <td id="css-pbv"><%= @consensu.pbv %></td>  
+                  <td><%= 'Max' %></td>
+                  <td id="css-pe"><%= @consensu.max %></td> 
+                  <td><%= 'Min' %></td>
+                  <td id="css-pbv"><%= @consensu.min %></td>   
                   <td><%= 'B-H-S' %></td>
                   <td id="b-h-s"><%= @consensu.bhs %></td>
-                  <td class='yield'><%= link_to('Yield', ext_lnk1, target: "_blank") %></td>
-                  <td id="yld"><%= @consensu.yield %></td>
+                  <td class='yield'><%= 'Yield' %></td>               
+                  <%# <td id="yld"><%= @consensu.yield %></td>
               </tr>
               <% end %>
               <% if @consensu.nil? %>    
@@ -66,18 +66,19 @@
               <!-- Calculated Percent -->
               <tr>
                 <td class='price'><%= link_to('Price', ext_lnk2, target: "_blank") %></td>
-                <td id="price"><%= number_with_precision(@stock.price, precision: 2) %></td>
-                <td colspan="3"><%= 'Up to Max Percent' %></td>
-                <% dif1 = @stock.max_price - @stock.price %>
-                <td id="up-to-max"><%= number_with_precision(dif1/@stock.price*100, precision: 2) %></td>
+                <%# <td id="price"><%= number_with_precision(@stock.price, precision: 2) </td> %>
+                
                 <% if !@consensu.nil? %> 
                   <td colspan="3"><%= 'Up to Target Percent' %></td>
-                  <% dif2 = @consensu.target_price - @stock.price %>                  
+                  <% dif2 = @consensu.target - @stock.price %>                  
                   <td id="up-to-target"><%= number_with_precision(dif2/@stock.price*100, precision: 2) %></td>
+                  <td colspan="3"><%= 'Up to Min Percent' %></td>
+                  <% dif1 = @consensu.min - @stock.price %>
+                  <td id="up-to-max"><%= number_with_precision(dif1/@stock.price*100, precision: 2) %></td>
                 <% else %>
                   <td colspan="4"><%= 'No consensus' %></td>
                 <% end %>
-                <td colspan="2"><%= @stock.market %></td>
+                <%# <td colspan="2"><%= @stock.market </td> %>
               </tr>    
               <!-- Portfolio -->
               <% if !@portfolio.nil? %> 
@@ -94,7 +95,7 @@
                   <td><%= number_with_precision(dif3/@stock.price*100, precision: 2) %></td>
                   <% if !@consensu.nil? %> 
                   <td colspan="3"><%= 'Up to Target Percent' %></td>
-                  <% dif4 = @consensu.target_price-unit_cost %>
+                  <% dif4 = @consensu.target-unit_cost %>
                   <td><%= number_with_precision(dif4/@stock.price*100, precision: 2) %></td>
                   <% else %>
                   <td colspan="4"><%= 'No consensus' %></td>

@@ -1,0 +1,27 @@
+# db/migrate/YYYYMMDDHHMMSS_drop_consensus_table.rb
+class DropConsensusTable < ActiveRecord::Migration[5.1]
+  def up
+    drop_table :consensus
+  end
+
+  def down
+    # Recreate old structure if needed for rollback
+    create_table :consensus do |t|
+      t.string :name
+      t.decimal :price, precision: 6, scale: 2
+      t.integer :buy
+      t.integer :hold
+      t.integer :sell
+      t.decimal :eps_a
+      t.decimal :eps_b
+      t.decimal :pe
+      t.decimal :pbv
+      t.decimal :yield
+      t.decimal :target_price, precision: 6, scale: 2
+      t.string :status
+      t.belongs_to :ticker, foreign_key: true
+      t.timestamps
+    end
+    add_index :consensus, [:name], unique: true
+  end
+end
